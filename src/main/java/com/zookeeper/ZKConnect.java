@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author abird
  * @date:2019-05-21
- * @Description:
+ * @Description:连接zookeeper测试
  */
 public class ZKConnect implements Watcher {
     private static final Logger log = LoggerFactory.getLogger(ZKConnect.class);
