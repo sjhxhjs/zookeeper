@@ -2,6 +2,7 @@ package com.zookeeper.nodeoperation;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.ACL;
+import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,11 +45,18 @@ public class ZKNodeOperator implements Watcher {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ZKNodeOperator zkServer = new ZKNodeOperator(ZKSERVER_PATH);
 
         //创建节点
-        zkServer.createZKNode("/testnode","testnode".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE);
+        //zkServer.createZKNode("/testnode","testnode".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE);
+
+        //修改节点值
+        /*Stat status = zkServer.getZooKeeper().setData("/testnode", "modify".getBytes(), 1);
+        log.warn("修改节点值后的版本号:{}",status.getVersion());*/
+
+        //删除节点
+        zkServer.getZooKeeper().delete("/testnode",2);
     }
 
     public ZooKeeper getZooKeeper() {
@@ -59,6 +67,12 @@ public class ZKNodeOperator implements Watcher {
         this.zooKeeper = zooKeeper;
     }
 
+    /**
+     * 创建节点
+     * @param path
+     * @param data
+     * @param acls
+     */
     private void createZKNode(String path, byte[] data, List<ACL> acls) {
         String result = "";
 
