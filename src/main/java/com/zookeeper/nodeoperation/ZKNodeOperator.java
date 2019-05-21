@@ -63,7 +63,7 @@ public class ZKNodeOperator implements Watcher {
         String result = "";
 
         try {
-            result = zooKeeper.create(path, data, acls, CreateMode.EPHEMERAL);
+            result = zooKeeper.create(path, data, acls, CreateMode.PERSISTENT);
             log.warn("创建节点成功");
         } catch (Exception e) {
             log.error("创建节点失败:{}",e.getMessage());
