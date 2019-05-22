@@ -2,10 +2,12 @@ package com.zookeeper.nodeoperation;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.ACL;
+import org.apache.zookeeper.data.Id;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,6 +49,12 @@ public class ZKNodeOperator implements Watcher {
 
     public static void main(String[] args) throws Exception {
         ZKNodeOperator zkServer = new ZKNodeOperator(ZKSERVER_PATH);
+
+        //设置权限列表
+        /*List<ACL> acls = new ArrayList<ACL>();
+        Id imooc1 = new Id("digest", "123456");
+        acls.add(new ACL(ZooDefs.Perms.ALL, imooc1));*/
+        Id imooc2 = new Id("ip", "127.0.0.1");
 
         //创建节点
         //zkServer.createZKNode("/testnode","testnode".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE);
